@@ -3,6 +3,7 @@ from pprint import pprint
 import json
 import sys
 from time import sleep
+from time import time
 
 def multiConvert(filename,newFileName,nameOptions,indexOptions):
     try:
@@ -11,16 +12,19 @@ def multiConvert(filename,newFileName,nameOptions,indexOptions):
     except:
         print(sys.exc_info()[1])
         return
+    startTime = time()
     for i in range(len(nameOptions)):
         if i > 0:
             filename = newFileName
         convert(filename, newFileName, nameOptions[i], indexOptions[i])
         sleep(0.05)
+    print("Program is finished succesfully [{}]s".format(time() - startTime))
 
 def multiRecovery(filename,indexOptions):
+    startTime = time()
     for i in range(len(indexOptions)):
         recovery(filename,indexOptions[i])
-
+    print("Program is finished succesfully [{}]s".format(time() - startTime))
 
 
 def recovery(fileName,Index):
@@ -59,8 +63,8 @@ def recovery(fileName,Index):
             #print("[{:.>5}-{:.>5}]{:_>15} > {:_>15}\r".format(i,r,data, UpdatedNames[header]['newNames'][index]))
             print("[{:.>5}-{:.>5}]{:_>15} > {:_>15}\r".format(i,r-1,data, UpdatedNames[header]['oldNames'][index]))
             ws.setExcellArray([UpdatedNames[header]['oldNames'][index]], i)
-        ws.saveExcellArray(fileName)
-        ws.close()
+    ws.saveExcellArray(fileName)
+    ws.close()
 
 def convert(fileName,newFileName,dataName,Index):
     ws = excellReader(fileName)
@@ -96,5 +100,5 @@ def convert(fileName,newFileName,dataName,Index):
             #print('*' * 15)
             print("[{:.>5}-{:.>5}]{:_>15} > {:_>15}\r".format(i,r-1,data, UpdatedNames[header]['newNames'][index]))
             ws.setExcellArray([UpdatedNames[header]['newNames'][index]], i)
-        ws.saveExcellArray(newFileName)
-        ws.close()
+    ws.saveExcellArray(newFileName)
+    ws.close()

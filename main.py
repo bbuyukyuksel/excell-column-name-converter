@@ -1,7 +1,7 @@
 from Convert import *
+import time
 from time import sleep
 if __name__ == '__main__':
-
 
     print('''
     multiConv       -> mc
@@ -34,8 +34,6 @@ if __name__ == '__main__':
     except:
         print(sys.exc_info()[1])
         exit()
-
-
         #multiConvert("test.xlsx","newExcellFile.xlsx",('TEST','DENEME'),('A','B'))
         #multiRecovery("newExcellFile.xlsx",('A','B'))
 
